@@ -1,1 +1,20 @@
-<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level></diagram>
+<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>10</x><y>30</y><w>440</w><h>300</h></coordinates><panel_attributes>&lt;&lt;APawn&gt;&gt;
+PlayerPaddle
+--
+
+UPROPERTY (EditAnywhere, Category = "Pawn Visual")
++ PawnSpriteComponent: UPaperSpriteComponent*
+
+UPROPERTY (VisibleAnywhere, BluePrintReadOnly, Category = "Custom")
+PlayerCollisionBox: UBoxComponent*
+
++ Speed: float
+
+- Movement: float
+
+--
+
++ Move(value: float)
+
+- SetDirection(Direction: const FVector)
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>
