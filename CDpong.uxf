@@ -1,4 +1,4 @@
-<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>90</x><y>890</y><w>440</w><h>300</h></coordinates><panel_attributes>&lt;&lt;APawn&gt;&gt;
+<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>360</x><y>890</y><w>440</w><h>300</h></coordinates><panel_attributes>&lt;&lt;APawn&gt;&gt;
 PlayerPaddle
 --
 
@@ -18,7 +18,7 @@ PlayerCollisionBox: UBoxComponent*
 # BeginPlay(): void &lt;virtaul override&gt;
 
 + Move(value: float): void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>650</x><y>890</y><w>440</w><h>300</h></coordinates><panel_attributes>&lt;&lt;APlayerPaddle&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>920</x><y>890</y><w>440</w><h>300</h></coordinates><panel_attributes>&lt;&lt;APlayerPaddle&gt;&gt;
 AIPaddle
 --
 UPROPERTY(EditInstanceOnly, Category = "AI")
@@ -37,7 +37,7 @@ UPROPERTY(EditInstanceOnly, Category = "AI", meta = (EditCondition = "bPatrol"))
 + Tick(DeltaTime: float): void &lt;virtual override&gt;
 
 # BeginPlay(): void &lt;virtaul override&gt;
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1140</x><y>890</y><w>710</w><h>240</h></coordinates><panel_attributes>&lt;&lt;AActor&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1410</x><y>890</y><w>710</w><h>240</h></coordinates><panel_attributes>&lt;&lt;AActor&gt;&gt;
 Ball
 --
 
@@ -58,7 +58,7 @@ UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Projectile Movement", 
 
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>80</y><w>640</w><h>660</h></coordinates><panel_attributes>&lt;&lt;AActor&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>820</x><y>80</y><w>640</w><h>660</h></coordinates><panel_attributes>&lt;&lt;AActor&gt;&gt;
 Board 
 --
 
@@ -110,12 +110,12 @@ UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Config", meta = (Allo
 
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>150</x><y>0</y><w>230</w><h>150</h></coordinates><panel_attributes>&lt;&lt;AGameModeBase&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>420</x><y>0</y><w>230</w><h>150</h></coordinates><panel_attributes>&lt;&lt;AGameModeBase&gt;&gt;
 UEGameMode
 --
 
 --
-# BeginPlay(): void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>100</x><y>320</y><w>330</w><h>200</h></coordinates><panel_attributes>&lt;&lt;AGameStateBase&gt;&gt;
+# BeginPlay(): void &lt;virtual override&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>370</x><y>320</y><w>330</w><h>200</h></coordinates><panel_attributes>&lt;&lt;AGameStateBase&gt;&gt;
 UEGameState
 --
 + PlayerGoals: float
@@ -126,33 +126,33 @@ UFUNCTION(BlueprintCallable, Category = "Pickups")
 + GetNumPlayerGoals(): int
 
 UFUNCTION(BlueprintCallable, Category = "Pickups")
-+ GetNumAIGoals(): int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>90</x><y>590</y><w>330</w><h>230</h></coordinates><panel_attributes>&lt;&lt;APlayerController&gt;&gt;
++ GetNumAIGoals(): int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>370</x><y>590</y><w>330</w><h>230</h></coordinates><panel_attributes>&lt;&lt;APlayerController&gt;&gt;
 UEPlayerController
 --
 # MyGameState: AUEGameState*
 
 # PlayerPaddle: APlayerPaddle*
 --
-# OnPossess(Pawn: APawn*): void &lt;virtual override&gt;
++ OnPossess(Pawn: APawn*): void &lt;virtual override&gt;
 
-# OnUnPossess(): void &lt;virtual override&gt;
++ OnUnPossess(): void &lt;virtual override&gt;
 
 # SetupInputComponent(): void &lt;virtual override&gt;
 
-# Move(value: float)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>240</x><y>140</y><w>30</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
-</panel_attributes><additional_attributes>10;10;10;180</additional_attributes></element><element><id>Text</id><coordinates><x>250</x><y>230</y><w>100</w><h>70</h></coordinates><panel_attributes>Has
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>260</x><y>160</y><w>100</w><h>90</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>260</x><y>290</y><w>100</w><h>90</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>860</x><y>730</y><w>50</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+# Move(value: float)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>510</x><y>140</y><w>30</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;10;10;180</additional_attributes></element><element><id>Text</id><coordinates><x>520</x><y>230</y><w>100</w><h>70</h></coordinates><panel_attributes>Has
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>530</x><y>160</y><w>100</w><h>90</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>530</x><y>290</y><w>100</w><h>90</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1130</x><y>730</y><w>50</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
 m2=1
-has</panel_attributes><additional_attributes>10;10;10;160</additional_attributes></element><element><id>Relation</id><coordinates><x>1130</x><y>730</y><w>30</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
-</panel_attributes><additional_attributes>10;10;10;160</additional_attributes></element><element><id>Text</id><coordinates><x>250</x><y>840</y><w>100</w><h>70</h></coordinates><panel_attributes>Has
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>260</x><y>820</y><w>100</w><h>90</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>1150</x><y>860</y><w>100</w><h>90</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>1150</x><y>810</y><w>100</w><h>70</h></coordinates><panel_attributes>Has
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>260</x><y>870</y><w>100</w><h>90</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>1150</x><y>750</y><w>100</w><h>90</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>520</x><y>1030</y><w>150</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;130;10</additional_attributes></element><element><id>Relation</id><coordinates><x>240</x><y>810</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
-</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>90</y><w>200</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+has</panel_attributes><additional_attributes>10;10;10;160</additional_attributes></element><element><id>Relation</id><coordinates><x>1400</x><y>730</y><w>30</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;10;10;160</additional_attributes></element><element><id>Text</id><coordinates><x>520</x><y>840</y><w>100</w><h>70</h></coordinates><panel_attributes>Has
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>530</x><y>820</y><w>100</w><h>90</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>1420</x><y>860</y><w>100</w><h>90</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>1420</x><y>810</y><w>100</w><h>70</h></coordinates><panel_attributes>Has
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>530</x><y>870</y><w>100</w><h>90</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>1420</x><y>750</y><w>100</w><h>90</h></coordinates><panel_attributes>1</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>790</x><y>1030</y><w>150</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;130;10</additional_attributes></element><element><id>Relation</id><coordinates><x>510</x><y>810</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>640</x><y>90</y><w>200</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
 m2=1
 has 
-</panel_attributes><additional_attributes>180;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>490</x><y>730</y><w>100</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>180;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>730</y><w>100</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
 m2=1
 has</panel_attributes><additional_attributes>80;10;10;160</additional_attributes></element></diagram>

@@ -3,6 +3,8 @@
 #include "PlayerPaddle.h"
 #include "PaperSpriteComponent.h"
 #include "Components/BoxComponent.h"
+#include "Camera/CameraComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 
 // Sets default values
 APlayerPaddle::APlayerPaddle()
@@ -22,7 +24,7 @@ APlayerPaddle::APlayerPaddle()
 	PlayerSprite = CreateDefaultSubobject<UPaperSpriteComponent>("Pawn Sprite");
 	PlayerSprite->SetupAttachment(RootComponent);
 	PlayerSprite->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
-
+	
 	Speed = 10;
 
 }
@@ -42,10 +44,14 @@ void APlayerPaddle::Tick(float DeltaTime)
 
 	if (Movement != 0)
 	{
-		NewLocation = GetActorLocation() + (GetActorForwardVector() * -Movement * Speed);
+		NewLocation = GetActorLocation() + (GetActorUpVector() * -Movement * Speed);
 	}
 
 	SetActorLocation(NewLocation);
+
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationYaw = false;
+	bUseControllerRotationRoll = false;
 
 }
 
@@ -53,7 +59,6 @@ void APlayerPaddle::Tick(float DeltaTime)
 void APlayerPaddle::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 void APlayerPaddle::Move(float value)
