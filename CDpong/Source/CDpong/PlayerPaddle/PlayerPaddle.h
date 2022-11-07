@@ -19,7 +19,7 @@ public:
 		class UPaperSpriteComponent* PlayerSprite;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Custom")
-		class UBoxComponent* PlayerCollisionBox;
+		class UBoxComponent* CollisionBox;
 
 protected:
 	// Called when the game starts or when spawned

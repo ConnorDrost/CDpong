@@ -3,8 +3,6 @@
 #include "PlayerPaddle.h"
 #include "PaperSpriteComponent.h"
 #include "Components/BoxComponent.h"
-#include "Camera/CameraComponent.h"
-#include "GameFramework/SpringArmComponent.h"
 
 // Sets default values
 APlayerPaddle::APlayerPaddle()
@@ -12,20 +10,22 @@ APlayerPaddle::APlayerPaddle()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	PlayerCollisionBox = CreateDefaultSubobject<UBoxComponent>("SceneRoot");
-	PlayerCollisionBox->SetBoxExtent(FVector(100, 10, 100));
-	PlayerCollisionBox->SetCollisionProfileName("BlockAllDynamic");
-	PlayerCollisionBox->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
-	PlayerCollisionBox->GetBodyInstance()->bLockRotation = true;
-	PlayerCollisionBox->GetBodyInstance()->bLockXTranslation = true;
-	PlayerCollisionBox->GetBodyInstance()->bLockYTranslation = true;
-	SetRootComponent(PlayerCollisionBox);
+	CollisionBox = CreateDefaultSubobject<UBoxComponent>("SceneRoot");
+	CollisionBox->SetBoxExtent(FVector(100, 10, 100));
+	CollisionBox->SetCollisionProfileName("BlockAllDynamic");
+	CollisionBox->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	CollisionBox->GetBodyInstance()->bLockRotation = true;
+	CollisionBox->GetBodyInstance()->bLockXTranslation = true;
+	CollisionBox->GetBodyInstance()->bLockYTranslation = true;
+	SetRootComponent(CollisionBox);
 
 	PlayerSprite = CreateDefaultSubobject<UPaperSpriteComponent>("Pawn Sprite");
 	PlayerSprite->SetupAttachment(RootComponent);
 	PlayerSprite->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
 	
 	Speed = 10;
+
+	Tags.Add("Player");
 
 }
 
