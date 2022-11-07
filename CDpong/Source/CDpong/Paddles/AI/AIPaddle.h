@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "../PlayerPaddle/PlayerPaddle.h"
+#include "../Player/PlayerPaddle.h"
 #include "AIPaddle.generated.h"
 
 /**
@@ -26,7 +26,7 @@ protected:
 
 	virtual void BeginPlay() override;
 
-	void SetBall(ABall* GameBall);
+	void SetBall(class ABall* GameBall);
 
 	class ABall* Ball;
 

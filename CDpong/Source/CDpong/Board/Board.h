@@ -11,6 +11,7 @@ class CDPONG_API ABoard : public AActor
 {
 	GENERATED_BODY()
 
+public:
 		UPROPERTY(VisibleAnywhere, Category = "Custom")
 			class UCameraComponent* Camera;
 
@@ -37,12 +38,6 @@ class CDPONG_API ABoard : public AActor
 
 		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Custom")
 			class UBoxComponent* BottomWall;
-
-		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPriavteAccess = "true"))
-			class UArrowComponent* SpawnPoint;
-
-		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Config", meta = (AllowPrivateAccess = "true"))
-			float SpawnDelay;
 	
 public:	
 	// Sets default values for this actor's properties

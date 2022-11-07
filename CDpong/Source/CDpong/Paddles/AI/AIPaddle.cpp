@@ -1,11 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "../Ball/Ball.h"
-#include "AIPaddle.h"
+#include "../../Ball/Ball.h"
+#include "../AI/AIPaddle.h"
 
 AAIPaddle::AAIPaddle()
 {
-
     Tags.Empty();
 
     Tags.Add("AIPaddle");

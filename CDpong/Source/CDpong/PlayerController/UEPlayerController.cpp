@@ -2,7 +2,7 @@
 
 
 #include "../PlayerController/UEPlayerController.h"
-#include "../PlayerPaddle/PlayerPaddle.h"
+#include "../Paddles/Player/PlayerPaddle.h"
 #include "../PlayerState/UEPlayerState.h"
 
 void AUEPlayerController::OnPossess(APawn* aPawn)
