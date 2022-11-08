@@ -3,7 +3,9 @@
 
 #include "../PlayerController/UEPlayerController.h"
 #include "../Paddles/Player/PlayerPaddle.h"
+#include "../Board/Board.h"
 #include "../PlayerState/UEPlayerState.h"
+#include "EngineUtils.h"
 
 void AUEPlayerController::OnPossess(APawn* aPawn)
 {
@@ -16,6 +18,18 @@ void AUEPlayerController::OnPossess(APawn* aPawn)
 void AUEPlayerController::OnUnPossess()
 {
 	Super::OnUnPossess();
+}
+
+void AUEPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	for (TActorIterator<ABoard> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		SetViewTarget(*ActorItr);
+	}
+
+
 }
 
 void AUEPlayerController::SetupInputComponent()

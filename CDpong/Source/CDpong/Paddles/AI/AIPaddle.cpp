@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "../../Ball/Ball.h"
 #include "../AI/AIPaddle.h"
+#include "../../Ball/Ball.h"
+
 
 AAIPaddle::AAIPaddle()
 {

@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "../Board/Board.h"
 #include "PaperSpriteComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/ArrowComponent.h"
@@ -8,7 +9,6 @@
 #include "../Ball/Ball.h"
 #include "../Paddles/Player/PlayerPaddle.h"
 #include "../Paddles/AI/AIPaddle.h"
-#include "../Board/Board.h"
 
 // Sets default values
 ABoard::ABoard()
@@ -60,7 +60,7 @@ ABoard::ABoard()
 
 	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
 	Camera->SetProjectionMode(ECameraProjectionMode::Orthographic);
-	Camera->SetOrthoWidth(5000.0f);
+	Camera->SetOrthoWidth(2000.0f);
 	Camera->SetupAttachment(RootComponent);
 
 

@@ -23,7 +23,7 @@ APlayerPaddle::APlayerPaddle()
 	PlayerSprite->SetupAttachment(RootComponent);
 	PlayerSprite->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
 	
-	Speed = 10;
+	Speed = 5;
 
 	Tags.Add("Player");
 
