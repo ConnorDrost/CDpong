@@ -13,7 +13,7 @@ APlayerPaddle::APlayerPaddle()
 	CollisionBox = CreateDefaultSubobject<UBoxComponent>("SceneRoot");
 	CollisionBox->SetBoxExtent(FVector(100, 10, 100));
 	CollisionBox->SetCollisionProfileName("BlockAllDynamic");
-	CollisionBox->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	CollisionBox->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	CollisionBox->GetBodyInstance()->bLockRotation = true;
 	CollisionBox->GetBodyInstance()->bLockXTranslation = true;
 	CollisionBox->GetBodyInstance()->bLockYTranslation = true;
@@ -22,7 +22,7 @@ APlayerPaddle::APlayerPaddle()
 
 	PlayerSprite = CreateDefaultSubobject<UPaperSpriteComponent>("Pawn Sprite");
 	PlayerSprite->SetupAttachment(RootComponent);
-	PlayerSprite->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	PlayerSprite->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
@@ -53,10 +53,6 @@ void APlayerPaddle::Tick(float DeltaTime)
 	}
 
 	SetActorLocation(NewLocation);
-
-	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = false;
-	bUseControllerRotationRoll = false;
 
 }
 

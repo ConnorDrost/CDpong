@@ -4,6 +4,7 @@
 #include "PaperSpriteComponent.h"
 #include "Components/BoxComponent.h"
 #include "Camera/CameraComponent.h"
+#include "DrawDebugHelpers.h"
 
 #include "../Ball/Ball.h"
 #include "../Paddles/Player/PlayerPaddle.h"
@@ -27,7 +28,7 @@ ABoard::ABoard()
 
 	TopWall = CreateDefaultSubobject<UBoxComponent>("TW Collision Box");
 	TopWall->SetBoxExtent(FVector(500, 50, 10));
-	TopWall->SetCollisionProfileName("BlockAllDynamic");
+	TopWall->SetCollisionProfileName("BlockAll");
 	TopWall->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
 	TopWall->GetBodyInstance()->bLockRotation = true;
 	TopWall->GetBodyInstance()->bLockTranslation = true;
@@ -36,7 +37,7 @@ ABoard::ABoard()
 
 	BottomWall = CreateDefaultSubobject<UBoxComponent>("BW Collision Box");
 	BottomWall->SetBoxExtent(FVector(500, 50, 10));
-	BottomWall->SetCollisionProfileName("BlockAllDynamic");
+	BottomWall->SetCollisionProfileName("BlockAll");
 	BottomWall->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
 	BottomWall->GetBodyInstance()->bLockRotation = true;
 	BottomWall->GetBodyInstance()->bLockTranslation = true;
@@ -65,6 +66,12 @@ ABoard::ABoard()
 	Camera->SetProjectionMode(ECameraProjectionMode::Orthographic);
 	Camera->SetOrthoWidth(2000.0f);
 	Camera->SetupAttachment(RootComponent);
+
+	RightGoal->OnComponentBeginOverlap.AddDynamic(this, &ABoard::BeginOverlap);
+	RightGoal->OnComponentEndOverlap.AddDynamic(this, &ABoard::EndOverlap);
+
+	LeftGoal->OnComponentBeginOverlap.AddDynamic(this, &ABoard::BeginOverlap);
+	LeftGoal->OnComponentEndOverlap.AddDynamic(this, &ABoard::EndOverlap);
 }
 
 void ABoard::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -85,7 +92,7 @@ void ABoard::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 				gameState->AIGoals++;
 			}
 
-			OtherActor->Destroy();
+			
 		}
 	}
 }
