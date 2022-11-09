@@ -29,7 +29,7 @@ ABoard::ABoard()
 	TopWall = CreateDefaultSubobject<UBoxComponent>("TW Collision Box");
 	TopWall->SetBoxExtent(FVector(500, 50, 10));
 	TopWall->SetCollisionProfileName("BlockAll");
-	TopWall->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	TopWall->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	TopWall->GetBodyInstance()->bLockRotation = true;
 	TopWall->GetBodyInstance()->bLockTranslation = true;
 	TopWall->SetSimulatePhysics(false);
@@ -38,7 +38,7 @@ ABoard::ABoard()
 	BottomWall = CreateDefaultSubobject<UBoxComponent>("BW Collision Box");
 	BottomWall->SetBoxExtent(FVector(500, 50, 10));
 	BottomWall->SetCollisionProfileName("BlockAll");
-	BottomWall->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	BottomWall->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	BottomWall->GetBodyInstance()->bLockRotation = true;
 	BottomWall->GetBodyInstance()->bLockTranslation = true;
 	BottomWall->SetSimulatePhysics(false);

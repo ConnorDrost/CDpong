@@ -20,15 +20,10 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
-	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Config", meta = (AllowPrivateAccess = "true"))
+		TSubclassOf<class ABall> BallTemplate;
 
 protected:
 
 	virtual void BeginPlay() override;
-
-	void SetBall(class ABall* GameBall);
-
-	class ABall* Ball;
-
-	
 };

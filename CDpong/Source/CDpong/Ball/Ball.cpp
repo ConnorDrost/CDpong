@@ -12,6 +12,22 @@ ABall::ABall()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	CollisionSphere = CreateDefaultSubobject<USphereComponent>("Projectile");
+	CollisionSphere->SetSphereRadius(5.0f);
+	CollisionSphere->SetCollisionProfileName("BlockAll");
+	SetRootComponent(CollisionSphere);
+
+	BallSprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("PaperFlipbookComponent"));
+	BallSprite->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	BallSprite->SetupAttachment(RootComponent);
+
+	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>("MovementComponent");
+	ProjectileMovementComponent->UpdatedComponent = CollisionSphere;
+	ProjectileMovementComponent->InitialSpeed = 1000.f;
+	ProjectileMovementComponent->MaxSpeed = 1000.f;
+	ProjectileMovementComponent->bRotationFollowsVelocity = false;
+	ProjectileMovementComponent->bShouldBounce = true;
+	ProjectileMovementComponent->ProjectileGravityScale = 0;
 }
 
 // Called when the game starts or when spawned

@@ -15,16 +15,11 @@ void AAIPaddle::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if (Ball != nullptr)
+    if (BallTemplate != nullptr)
     {
-        SetActorLocation(FMath::VInterpConstantTo(GetActorLocation(), Ball->GetActorLocation(), DeltaTime, 600.f));
+        //SetActorLocation(FMath::VInterpConstantTo(GetActorLocation(), BallTemplate->GetActorLocation(), DeltaTime, 600.f));
     }
    
-}
-
-void AAIPaddle::SetBall(ABall* GameBall)
-{
-    Ball = GameBall;
 }
 
 void AAIPaddle::BeginPlay()
@@ -34,4 +29,6 @@ void AAIPaddle::BeginPlay()
     Tags.Add("AIPaddle");
 
     Super::BeginPlay();
+
+   
 }
