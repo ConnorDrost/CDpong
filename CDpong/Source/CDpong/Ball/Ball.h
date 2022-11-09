@@ -16,7 +16,7 @@ public:
 	ABall();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Config", meta = (AllowPrivateAccess = "true"))
-		class USphereComponent* SphereComponent;
+		class USphereComponent* CollisionSphere;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Config", meta = (AllowPrivateAccess = "true"))
 		class UPaperSpriteComponent* BallSprite;
@@ -31,5 +31,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	class UPrimitiveComponent* GetPhysicsComponent();
 
 };
