@@ -31,9 +31,6 @@ public:
 		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Config", meta = (AllowPrivateAccess = "true"))
 			TSubclassOf<class AAIPaddle> AIPaddleTemplate;
 
-		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Config", meta = (AllowPrivateAccess = "true"))
-			TSubclassOf<class AActorSpawner> SpawnerTemplate;
-
 		UPROPERTY(EditAnywhere, Category = "Actor Visual")
 			class UPaperSpriteComponent* BoardSprite;
 
@@ -69,5 +66,16 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+private:
+
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+		class UArrowComponent* SpawnPointComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Config", meta = (AllowPrivateAccess = "true"))
+		float SpawnDelay = 3.f;
+
+	void SpawnActor();
 
 };

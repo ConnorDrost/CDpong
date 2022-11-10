@@ -18,6 +18,7 @@ APlayerPaddle::APlayerPaddle()
 	CollisionBox->GetBodyInstance()->bLockXTranslation = true;
 	CollisionBox->GetBodyInstance()->bLockYTranslation = true;
 	CollisionBox->SetNotifyRigidBodyCollision(true);
+	CollisionBox->SetCollisionObjectType(ECollisionChannel::ECC_PhysicsBody);
 	SetRootComponent(CollisionBox);
 
 	PlayerSprite = CreateDefaultSubobject<UPaperSpriteComponent>("Pawn Sprite");
@@ -29,8 +30,6 @@ APlayerPaddle::APlayerPaddle()
 	bUseControllerRotationRoll = false;
 	
 	Speed = 2.5;
-
-	Tags.Add("Player");
 
 }
 

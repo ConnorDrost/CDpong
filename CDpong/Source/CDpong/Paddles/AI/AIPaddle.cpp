@@ -2,33 +2,32 @@
 
 #include "../AI/AIPaddle.h"
 #include "../../Ball/Ball.h"
+#include "EngineUtils.h"
 
 
 AAIPaddle::AAIPaddle()
 {
-    Tags.Empty();
 
-    Tags.Add("AIPaddle");
 }
 
 void AAIPaddle::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if (BallTemplate != nullptr)
+
+    //ACTOR ITERATOR LOOP
+    for (TActorIterator<ABall> ActorItr(GetWorld()); ActorItr; ++ActorItr)
     {
-        //SetActorLocation(FMath::VInterpConstantTo(GetActorLocation(), BallTemplate->GetActorLocation(), DeltaTime, 600.f));
+        ABall* Ball = *ActorItr;
+
+        if (Ball != nullptr)
+        {
+            SetActorLocation(FMath::VInterpConstantTo(GetActorLocation(), FVector(300, 580, Ball->GetActorLocation().Z), DeltaTime, 600.f));
+        }
     }
-   
 }
 
 void AAIPaddle::BeginPlay()
 {
-    Tags.Empty();
-
-    Tags.Add("AIPaddle");
-
-    Super::BeginPlay();
-
-   
+    Super::BeginPlay();  
 }

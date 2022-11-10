@@ -4,7 +4,6 @@
 #include "../PlayerController/UEPlayerController.h"
 #include "../Paddles/Player/PlayerPaddle.h"
 #include "../Board/Board.h"
-#include "../PlayerState/UEPlayerState.h"
 #include "EngineUtils.h"
 
 void AUEPlayerController::OnPossess(APawn* aPawn)

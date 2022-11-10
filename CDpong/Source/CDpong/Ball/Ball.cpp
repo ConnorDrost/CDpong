@@ -22,12 +22,12 @@ ABall::ABall()
 	BallSprite->SetupAttachment(RootComponent);
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>("MovementComponent");
-	ProjectileMovementComponent->UpdatedComponent = CollisionSphere;
-	ProjectileMovementComponent->InitialSpeed = 1000.f;
+	ProjectileMovementComponent->InitialSpeed = 200.f;
 	ProjectileMovementComponent->MaxSpeed = 1000.f;
 	ProjectileMovementComponent->bRotationFollowsVelocity = false;
 	ProjectileMovementComponent->bShouldBounce = true;
 	ProjectileMovementComponent->ProjectileGravityScale = 0;
+	ProjectileMovementComponent->UpdatedComponent = CollisionSphere;
 }
 
 // Called when the game starts or when spawned

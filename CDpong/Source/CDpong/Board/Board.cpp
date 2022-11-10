@@ -4,6 +4,7 @@
 #include "PaperSpriteComponent.h"
 #include "Components/BoxComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Components/ArrowComponent.h"
 #include "DrawDebugHelpers.h"
 
 #include "../Ball/Ball.h"
@@ -11,7 +12,6 @@
 #include "../Paddles/AI/AIPaddle.h"
 #include "../GameMode/UEGameMode.h"
 #include "../GameState/UEGameState.h"
-#include "../Spawner/\ActorSpawner.h"
 
 // Sets default values
 ABoard::ABoard()
@@ -33,6 +33,7 @@ ABoard::ABoard()
 	TopWall->GetBodyInstance()->bLockRotation = true;
 	TopWall->GetBodyInstance()->bLockTranslation = true;
 	TopWall->SetSimulatePhysics(false);
+	TopWall->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
 	TopWall->SetupAttachment(RootComponent);
 
 	BottomWall = CreateDefaultSubobject<UBoxComponent>("BW Collision Box");
@@ -72,6 +73,12 @@ ABoard::ABoard()
 
 	LeftGoal->OnComponentBeginOverlap.AddDynamic(this, &ABoard::BeginOverlap);
 	LeftGoal->OnComponentEndOverlap.AddDynamic(this, &ABoard::EndOverlap);
+
+	SpawnPointComponent = CreateDefaultSubobject<UArrowComponent>
+		(TEXT("SpawnPoint"));
+	SpawnPointComponent->SetupAttachment(RootComponent);
+	SpawnPointComponent->ArrowSize = 5.f;
+	SpawnPointComponent->SetRelativeRotation(FRotator(50.f, 0.f, 0.f));
 }
 
 void ABoard::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -120,5 +127,30 @@ void ABoard::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ABoard::SpawnActor()
+{
+	if (BallTemplate != nullptr)
+	{
+		UWorld* World = GetWorld();
+		
+		if (World)
+		{
+			FActorSpawnParameters SpawnParams;
+			SpawnParams.Owner = this;
+			SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+			FTransform SpawnTransform = SpawnPointComponent->GetComponentTransform();
+			ABall* SpawnedActor = World->SpawnActor<ABall>(BallTemplate, SpawnTransform, SpawnParams);
+
+			if (SpawnedActor)
+			{
+				FVector direction = FRotationMatrix(SpawnTransform.Rotator()).GetScaledAxis(EAxis::Y);
+				UPrimitiveComponent* physicsComponent = SpawnedActor->GetPhysicsComponent();
+				physicsComponent->AddForce(direction * 100, NAME_None, true);
+			}
+		}
+	}
 }
 
