@@ -76,9 +76,11 @@ ABoard::ABoard()
 
 	SpawnPointComponent = CreateDefaultSubobject<UArrowComponent>
 		(TEXT("SpawnPoint"));
-	SpawnPointComponent->SetupAttachment(RootComponent);
 	SpawnPointComponent->ArrowSize = 5.f;
 	SpawnPointComponent->SetRelativeRotation(FRotator(50.f, 0.f, 0.f));
+	SpawnPointComponent->SetRelativeLocation(FVector(0.0f, 30.0f, 0.0f));
+	SpawnPointComponent->SetupAttachment(RootComponent);
+
 }
 
 void ABoard::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -111,6 +113,9 @@ void ABoard::EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
 		if (OtherActor->IsA<ABall>())
 		{
 			OtherActor->Destroy();
+
+			SpawnActor();
+			
 		}
 	}
 }
@@ -120,13 +125,13 @@ void ABoard::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	SpawnActor();
 }
 
 // Called every frame
 void ABoard::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void ABoard::SpawnActor()

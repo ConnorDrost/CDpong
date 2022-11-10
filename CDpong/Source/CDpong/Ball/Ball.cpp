@@ -6,6 +6,10 @@
 #include "PaperSpriteComponent.h"
 #include "Components/SphereComponent.h"
 
+#include "../Paddles/Player/PlayerPaddle.h"
+#include "../Paddles/AI/AIPaddle.h"
+#include "../Board/Board.h"
+
 // Sets default values
 ABall::ABall()
 {
@@ -15,14 +19,18 @@ ABall::ABall()
 	CollisionSphere = CreateDefaultSubobject<USphereComponent>("Projectile");
 	CollisionSphere->SetSphereRadius(5.0f);
 	CollisionSphere->SetCollisionProfileName("BlockAll");
+	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	CollisionSphere->GetBodyInstance()->bLockRotation = true;
+	CollisionSphere->OnComponentHit.AddDynamic(this, &ABall::OnHit);
 	SetRootComponent(CollisionSphere);
 
 	BallSprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("PaperFlipbookComponent"));
 	BallSprite->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	BallSprite->GetBodyInstance()->bLockRotation = true;
 	BallSprite->SetupAttachment(RootComponent);
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>("MovementComponent");
-	ProjectileMovementComponent->InitialSpeed = 200.f;
+	ProjectileMovementComponent->InitialSpeed = 600.f;
 	ProjectileMovementComponent->MaxSpeed = 1000.f;
 	ProjectileMovementComponent->bRotationFollowsVelocity = false;
 	ProjectileMovementComponent->bShouldBounce = true;
@@ -42,6 +50,22 @@ void ABall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ABall::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	if (OtherActor && OtherActor != this)
+	{
+		if (OtherActor->IsA<class APlayerPaddle>() || OtherActor->IsA<class AAIPaddle>())
+		{
+			
+		}	
+
+		if (OtherActor->IsA<class ABoard>())
+		{
+
+		}
+	}
 }
 
 UPrimitiveComponent* ABall::GetPhysicsComponent()
