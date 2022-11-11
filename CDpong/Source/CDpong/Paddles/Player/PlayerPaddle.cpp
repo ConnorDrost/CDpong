@@ -3,6 +3,7 @@
 #include "PlayerPaddle.h"
 #include "PaperSpriteComponent.h"
 #include "Components/BoxComponent.h"
+#include "../../Board/Board.h"
 
 // Sets default values
 APlayerPaddle::APlayerPaddle()
@@ -28,6 +29,8 @@ APlayerPaddle::APlayerPaddle()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
+
+	CollisionBox->OnComponentHit.AddDynamic(this, &APlayerPaddle::OnHit);
 	
 	Speed = 2.5;
 
@@ -64,5 +67,16 @@ void APlayerPaddle::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 void APlayerPaddle::Move(float value)
 {
 	Movement = value;
+}
+
+void APlayerPaddle::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	if (OtherActor && OtherActor != this)
+	{
+		if (OtherActor->IsA<class ABoard>())
+		{
+
+		}
+	}
 }
 

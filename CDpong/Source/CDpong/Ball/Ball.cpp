@@ -31,25 +31,25 @@ ABall::ABall()
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>("MovementComponent");
 	ProjectileMovementComponent->InitialSpeed = 600.f;
-	ProjectileMovementComponent->MaxSpeed = 1000.f;
+	ProjectileMovementComponent->MaxSpeed = 10000000.f;
 	ProjectileMovementComponent->bRotationFollowsVelocity = false;
 	ProjectileMovementComponent->bShouldBounce = true;
 	ProjectileMovementComponent->ProjectileGravityScale = 0;
+	ProjectileMovementComponent->Bounciness = 1.f;
 	ProjectileMovementComponent->UpdatedComponent = CollisionSphere;
+
 }
 
 // Called when the game starts or when spawned
 void ABall::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
 void ABall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void ABall::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -58,13 +58,8 @@ void ABall::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimit
 	{
 		if (OtherActor->IsA<class APlayerPaddle>() || OtherActor->IsA<class AAIPaddle>())
 		{
-			
+
 		}	
-
-		if (OtherActor->IsA<class ABoard>())
-		{
-
-		}
 	}
 }
 
