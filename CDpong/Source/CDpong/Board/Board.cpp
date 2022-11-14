@@ -77,7 +77,7 @@ ABoard::ABoard()
 	SpawnPointComponent = CreateDefaultSubobject<UArrowComponent>
 		(TEXT("SpawnPoint"));
 	SpawnPointComponent->ArrowSize = 5.f;
-	SpawnPointComponent->SetRelativeRotation(FRotator(50.f, 0.f, 0.f));
+	SpawnPointComponent->SetRelativeRotation(FRotator(30.f, 0.f, 0.f));
 	SpawnPointComponent->SetRelativeLocation(FVector(0.0f, 30.0f, 0.0f));
 	SpawnPointComponent->SetupAttachment(RootComponent);
 

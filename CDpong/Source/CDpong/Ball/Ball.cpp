@@ -35,7 +35,7 @@ ABall::ABall()
 	ProjectileMovementComponent->bRotationFollowsVelocity = false;
 	ProjectileMovementComponent->bShouldBounce = true;
 	ProjectileMovementComponent->ProjectileGravityScale = 0;
-	ProjectileMovementComponent->Bounciness = 1.f;
+	ProjectileMovementComponent->Bounciness = 2.f;
 	ProjectileMovementComponent->UpdatedComponent = CollisionSphere;
 
 }
@@ -58,7 +58,7 @@ void ABall::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimit
 	{
 		if (OtherActor->IsA<class APlayerPaddle>() || OtherActor->IsA<class AAIPaddle>())
 		{
-
+			//Increase Speed
 		}	
 	}
 }
