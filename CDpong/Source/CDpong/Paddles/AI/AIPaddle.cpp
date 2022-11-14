@@ -22,7 +22,7 @@ void AAIPaddle::Tick(float DeltaTime)
 
         if (Ball != nullptr)
         {
-            SetActorLocation(FMath::VInterpConstantTo(GetActorLocation(), FVector(GetActorLocation().X, GetActorLocation().Y, Ball->GetActorLocation().Z), DeltaTime, 600.f));
+            SetActorLocation(FMath::VInterpConstantTo(GetActorLocation(), FVector(GetActorLocation().X, GetActorLocation().Y, Ball->GetActorLocation().Z), DeltaTime, 300.f));
         }
     }
 }

@@ -13,13 +13,15 @@ APlayerPaddle::APlayerPaddle()
 
 	CollisionBox = CreateDefaultSubobject<UBoxComponent>("SceneRoot");
 	CollisionBox->SetBoxExtent(FVector(100, 10, 100));
-	CollisionBox->SetCollisionProfileName("BlockAllDynamic");
+	CollisionBox->SetCollisionProfileName("BlockAll");
 	CollisionBox->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	CollisionBox->SetNotifyRigidBodyCollision(true);
+	CollisionBox->SetSimulatePhysics(true);
 	CollisionBox->GetBodyInstance()->bLockRotation = true;
 	CollisionBox->GetBodyInstance()->bLockXTranslation = true;
 	CollisionBox->GetBodyInstance()->bLockYTranslation = true;
-	CollisionBox->SetNotifyRigidBodyCollision(true);
-	CollisionBox->SetCollisionObjectType(ECollisionChannel::ECC_PhysicsBody);
+	CollisionBox->SetEnableGravity(false);
+	CollisionBox->SetLinearDamping(10.0f);
 	SetRootComponent(CollisionBox);
 
 	PlayerSprite = CreateDefaultSubobject<UPaperSpriteComponent>("Pawn Sprite");
@@ -29,8 +31,6 @@ APlayerPaddle::APlayerPaddle()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
-
-	CollisionBox->OnComponentHit.AddDynamic(this, &APlayerPaddle::OnHit);
 	
 	Speed = 2.5;
 
@@ -67,16 +67,5 @@ void APlayerPaddle::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 void APlayerPaddle::Move(float value)
 {
 	Movement = value;
-}
-
-void APlayerPaddle::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
-{
-	if (OtherActor && OtherActor != this)
-	{
-		if (OtherActor->IsA<class ABoard>())
-		{
-
-		}
-	}
 }
 

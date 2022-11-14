@@ -6,9 +6,6 @@
 #include "PaperSpriteComponent.h"
 #include "Components/SphereComponent.h"
 
-#include "../Paddles/Player/PlayerPaddle.h"
-#include "../Paddles/AI/AIPaddle.h"
-
 // Sets default values
 ABall::ABall()
 {
@@ -20,9 +17,6 @@ ABall::ABall()
 	CollisionSphere->SetCollisionProfileName("BlockAll");
 	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	CollisionSphere->GetBodyInstance()->bLockRotation = true;
-	CollisionSphere->OnComponentHit.AddDynamic(this, &ABall::OnHit);
-	CollisionSphere->SetSimulatePhysics(true);
-	CollisionSphere->SetEnableGravity(false);
 	SetRootComponent(CollisionSphere);
 
 	BallSprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("PaperFlipbookComponent"));
@@ -32,11 +26,12 @@ ABall::ABall()
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>("MovementComponent");
 	ProjectileMovementComponent->InitialSpeed = 600.f;
-	ProjectileMovementComponent->MaxSpeed = 10000000.f;
+	ProjectileMovementComponent->MaxSpeed = 10000.f;
 	ProjectileMovementComponent->bRotationFollowsVelocity = false;
 	ProjectileMovementComponent->bShouldBounce = true;
 	ProjectileMovementComponent->ProjectileGravityScale = 0;
-	ProjectileMovementComponent->Bounciness = 1.f;
+	ProjectileMovementComponent->Bounciness = 1.1f;
+	ProjectileMovementComponent->Friction = 0;
 	ProjectileMovementComponent->UpdatedComponent = CollisionSphere;
 
 }
@@ -51,19 +46,6 @@ void ABall::BeginPlay()
 void ABall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-}
-
-void ABall::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
-{
-	if (OtherActor && OtherActor != this)
-	{
-		if (OtherActor->IsA<class AAIPaddle>())
-		{
-			/*FVector direction = FRotationMatrix(CollisionSphere->GetComponentTransform().Rotator()).GetScaledAxis(EAxis::Y);
-			CollisionSphere->GetBodyInstance()->AddForce(direction * 10000000, NAME_None, true);
-			ProjectileMovementComponent->UpdatedComponent = CollisionSphere;*/
-		}	
-	}
 }
 
 UPrimitiveComponent* ABall::GetPhysicsComponent()

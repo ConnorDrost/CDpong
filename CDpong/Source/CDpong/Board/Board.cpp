@@ -28,7 +28,7 @@ ABoard::ABoard()
 
     TopWall = CreateDefaultSubobject<UBoxComponent>("TW Collision Box");
     TopWall->SetBoxExtent(FVector(500, 50, 10));
-    TopWall->SetCollisionProfileName("BlockAll");
+    TopWall->SetCollisionProfileName("BlockAllDynamic");
     TopWall->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
     TopWall->GetBodyInstance()->bLockRotation = true;
     TopWall->GetBodyInstance()->bLockTranslation = true;
@@ -38,7 +38,7 @@ ABoard::ABoard()
 
     BottomWall = CreateDefaultSubobject<UBoxComponent>("BW Collision Box");
     BottomWall->SetBoxExtent(FVector(500, 50, 10));
-    BottomWall->SetCollisionProfileName("BlockAll");
+    BottomWall->SetCollisionProfileName("BlockAllDynamic");
     BottomWall->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
     BottomWall->GetBodyInstance()->bLockRotation = true;
     BottomWall->GetBodyInstance()->bLockTranslation = true;
@@ -77,7 +77,7 @@ ABoard::ABoard()
     SpawnPointComponent = CreateDefaultSubobject<UArrowComponent>
         (TEXT("SpawnPoint"));
     SpawnPointComponent->ArrowSize = 5.f;
-    SpawnPointComponent->SetRelativeRotation(FRotator(30.f, 0.f, 0.f));
+    SpawnPointComponent->SetRelativeRotation(FRotator(0.f, 0.f, 0.f));
     SpawnPointComponent->SetRelativeLocation(FVector(0.0f, 30.0f, 0.0f));
     SpawnPointComponent->SetupAttachment(RootComponent);
 
@@ -95,7 +95,6 @@ void ABoard::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Othe
 
             if (OverlappedComponent == AIGoal)
             {
-
 
                 gameState->PlayerGoals++;
 
@@ -117,7 +116,8 @@ void ABoard::EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherA
     {
         if (OtherActor->IsA<ABall>())
         {
-            OtherActor->TeleportTo(SpawnPointComponent->GetComponentLocation(), FRotator::ZeroRotator);
+            OtherActor->Destroy();
+            SpawnActor();
         }
     }
 }
@@ -148,15 +148,10 @@ void ABoard::SpawnActor()
             SpawnParams.Owner = this;
             SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-            FTransform SpawnTransform = SpawnPointComponent->GetComponentTransform();
+            FVector SpawnLocation = SpawnPointComponent->GetComponentLocation();
+            FRotator SpawnRotation = FRotator(FMath::RandRange(30.f, -30.f), 0, 0);
+            FTransform SpawnTransform = FTransform(SpawnRotation, SpawnLocation);
             ABall* SpawnedActor = World->SpawnActor<ABall>(BallTemplate, SpawnTransform, SpawnParams);
-
-            if (SpawnedActor)
-            {
-                FVector direction = FRotationMatrix(SpawnTransform.Rotator()).GetScaledAxis(EAxis::Y);
-                UPrimitiveComponent* physicsComponent = SpawnedActor->GetPhysicsComponent();
-                physicsComponent->AddForce(direction * 100, NAME_None, true);
-            }
         }
     }
 }
