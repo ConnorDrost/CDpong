@@ -8,7 +8,6 @@
 
 #include "../Paddles/Player/PlayerPaddle.h"
 #include "../Paddles/AI/AIPaddle.h"
-#include "../Board/Board.h"
 
 // Sets default values
 ABall::ABall()
@@ -22,6 +21,8 @@ ABall::ABall()
 	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	CollisionSphere->GetBodyInstance()->bLockRotation = true;
 	CollisionSphere->OnComponentHit.AddDynamic(this, &ABall::OnHit);
+	CollisionSphere->SetSimulatePhysics(true);
+	CollisionSphere->SetEnableGravity(false);
 	SetRootComponent(CollisionSphere);
 
 	BallSprite = CreateDefaultSubobject<UPaperSpriteComponent>(TEXT("PaperFlipbookComponent"));
@@ -35,7 +36,7 @@ ABall::ABall()
 	ProjectileMovementComponent->bRotationFollowsVelocity = false;
 	ProjectileMovementComponent->bShouldBounce = true;
 	ProjectileMovementComponent->ProjectileGravityScale = 0;
-	ProjectileMovementComponent->Bounciness = 2.f;
+	ProjectileMovementComponent->Bounciness = 1.f;
 	ProjectileMovementComponent->UpdatedComponent = CollisionSphere;
 
 }
@@ -56,9 +57,11 @@ void ABall::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimit
 {
 	if (OtherActor && OtherActor != this)
 	{
-		if (OtherActor->IsA<class APlayerPaddle>() || OtherActor->IsA<class AAIPaddle>())
+		if (OtherActor->IsA<class AAIPaddle>())
 		{
-			//Increase Speed
+			/*FVector direction = FRotationMatrix(CollisionSphere->GetComponentTransform().Rotator()).GetScaledAxis(EAxis::Y);
+			CollisionSphere->GetBodyInstance()->AddForce(direction * 10000000, NAME_None, true);
+			ProjectileMovementComponent->UpdatedComponent = CollisionSphere;*/
 		}	
 	}
 }

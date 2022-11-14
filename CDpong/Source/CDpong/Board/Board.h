@@ -6,13 +6,6 @@
 #include "GameFramework/Actor.h"
 #include "Board.generated.h"
 
-UENUM(BlueprintType)
-enum class EGoal : uint8
-{
-	LEFT = 0 UMETA(DisplayName = "LEFT"),
-	RIGHT = 1 UMETA(DisplayName = "RIGHT")
-};
-
 UCLASS()
 class CDPONG_API ABoard : public AActor
 {
@@ -35,10 +28,10 @@ public:
 			class UPaperSpriteComponent* BoardSprite;
 
 		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Custom")
-			class UBoxComponent* LeftGoal;
+			class UBoxComponent* PlayerGoal;
 
 		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Custom")
-			class UBoxComponent* RightGoal;
+			class UBoxComponent* AIGoal;
 
 		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Custom")
 			class UBoxComponent* TopWall;
@@ -46,9 +39,6 @@ public:
 		UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Custom")
 			class UBoxComponent* BottomWall;
 
-		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Goal)
-			TEnumAsByte<EGoal> goal;
-	
 public:	
 	// Sets default values for this actor's properties
 	ABoard();
@@ -72,9 +62,6 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 		class UArrowComponent* SpawnPointComponent;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Config", meta = (AllowPrivateAccess = "true"))
-		float SpawnDelay = 3.f;
 
 	void SpawnActor();
 
